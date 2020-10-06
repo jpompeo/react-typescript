@@ -1,13 +1,27 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
+import { Dispatch } from 'redux';
+import ThunkDispatch from 'redux-thunk';
+import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import { Link } from 'react-router-dom';
+import {
+    saveUsername as saveUsernameAction,
+    saveUserMessage as saveUserMessageAction
+} from "../store/user/UserActions";
+import { IUser } from '../store/user/UserTypes';
+import { IAppState } from '../store/RootReducer';
 import '../styles/App.css';
 
-interface AppOwnProps {
+interface IAppDispatchToProps {
+    saveUsername: (user: IUser) => void;
+    saveUserMessage: (user: IUser) => void;
+}
+
+interface IAppOwnProps {
     username: string | undefined;
     userType: 'admin' | 'moderator' | 'user' | 'guest';
 }
 
-const App: React.FC<AppOwnProps> = ({userType, username}): JSX.Element => {
+const App: React.FC<IAppOwnProps> = ({userType, username}): JSX.Element => {
   const [time, setTime] = useState<Date>(() => new Date(Date.now()));
   const [message, setMessage] = useState<string>('');
 
@@ -51,5 +65,17 @@ const App: React.FC<AppOwnProps> = ({userType, username}): JSX.Element => {
       </div>
   )
 }
+
+const mapDispatchToProps: MapDispatchToProps<
+    IAppDispatchToProps,
+    IAppOwnProps
+> = (dispatch: Dispatch, ownProps: IAppOwnProps): IAppDispatchToProps => ({
+    saveUsername: (user: IUser) => {
+       dispatch(saveUserMessageAction(user));
+   },
+    saveUserMessage: (user: IUser) => {
+        dispatch(saveUserMessageAction(user));
+    }
+});
 
 export default App;
