@@ -46,8 +46,8 @@ const App: React.FC<IAppDispatchToProps & IAppOwnProps> =
 		}, [username, saveUsername]);
 
 		useEffect(() => {
-			saveUserMessage({username, userMessage: message});
-		}, [message, saveUserMessage, username])
+			saveUserMessage({username: undefined, userMessage: message});
+		}, [message, saveUserMessage])
 
 		return (
 			<div className={"App"}>
