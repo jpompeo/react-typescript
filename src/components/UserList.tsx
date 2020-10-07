@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { Dispatch, AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
@@ -21,11 +21,27 @@ interface IUserListDispatchToProps {
     getFriendList: (url: string) => void;
 }
 
+type IUserList = IUserListStateToProps & IUserListDispatchToProps & IUserListOwnProps;
+
 // const ComponentName: ComponentType<PropsInterface> = (): ReturnType => {}
-const UserList: React.FC<IUserListStateToProps & IUserListOwnProps> =
+const UserList: React.FC<IUserList> =
     ({
-        user
+        user,
+        getFriendList
      }): JSX.Element => {
+
+    //declaring state with hooks
+        //[stateName, methodToSetState] = functionToInvokeState<typeOfStateValue>(initialState);
+    const [fetchFriends, setFetchFriends] = useState<boolean>(true);
+
+    //on component mount/update?
+    useEffect(() => {
+        if (fetchFriends) {
+            getFriendList('https://jsonplaceholder.typicode.com/users');
+            setFetchFriends(false);
+        }
+    }, [fetchFriends])
+
     return (
         <CenterContent>
             <p>
