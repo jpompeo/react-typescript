@@ -16,7 +16,7 @@ interface IUserListStateToProps {
 }
 
 // const ComponentName: ComponentType<PropsInterface> = (): ReturnType => {}
-export const UserList: React.FC<IUserListOwnProps> = (): JSX.Element => {
+const UserList: React.FC<IUserListOwnProps> = (): JSX.Element => {
     return (
         <CenterContent>
             <p>
@@ -31,6 +31,10 @@ export const UserList: React.FC<IUserListOwnProps> = (): JSX.Element => {
     );
 }
 
+const CenterContent = styled.div`
+  text-align: center;
+`;
+
 const mapStateToProps: MapStateToProps<
         IUserListStateToProps,
         IUserListOwnProps,
@@ -40,6 +44,4 @@ const mapStateToProps: MapStateToProps<
     ...ownProps
 })
 
-const CenterContent = styled.div`
-  text-align: center;
-`;
+export default connect<IUserListStateToProps, {}, IUserListOwnProps, IAppState>(mapStateToProps)(UserList);
