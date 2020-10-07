@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IAppState } from '../store/RootReducer';
 import { IUser } from '../store/user/UserTypes';
+import { getFriendList as getFriendListAction } from '../store/user/UserActions';
 
 interface IUserListOwnProps {
 
@@ -13,6 +14,11 @@ interface IUserListOwnProps {
 
 interface IUserListStateToProps {
     user: IUser
+}
+
+interface IUserListDispatchToProps {
+    //propertyName: [function](param: paramType) => returnType;
+    getFriendList: (url: string) => void;
 }
 
 // const ComponentName: ComponentType<PropsInterface> = (): ReturnType => {}
@@ -53,4 +59,13 @@ const mapStateToProps: MapStateToProps<
     ...ownProps
 })
 
-export default connect<IUserListStateToProps, {}, IUserListOwnProps, IAppState>(mapStateToProps)(UserList);
+const mapDispatchToProps: MapDispatchToProps<
+    IUserListDispatchToProps,
+    IUserListOwnProps
+    > = (dispatch: ThunkDispatch<{}, {}, AnyAction>, ownProps: IUserListOwnProps) => ({
+    getFriendList: async (url: string) => {
+        dispatch(getFriendListAction(url));
+    }
+})
+
+export default connect<IUserListStateToProps, IUserListDispatchToProps, IUserListOwnProps, IAppState>(mapStateToProps, mapDispatchToProps)(UserList);
