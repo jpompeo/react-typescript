@@ -16,9 +16,18 @@ interface IUserListStateToProps {
 }
 
 // const ComponentName: ComponentType<PropsInterface> = (): ReturnType => {}
-const UserList: React.FC<IUserListOwnProps> = (): JSX.Element => {
+const UserList: React.FC<IUserListStateToProps & IUserListOwnProps> =
+    ({
+        user
+     }): JSX.Element => {
     return (
         <CenterContent>
+            <p>
+                Retrieved Username: {user.username ? user.username : 'No username found'}
+            </p>
+            <p>
+                Retrieved User Message: {user.userMessage ? user.userMessage : 'No message found'}
+            </p>
             <p>
                 UserList
             </p>

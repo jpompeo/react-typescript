@@ -5,7 +5,7 @@ import { store } from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './styles/index.css';
 import App from './components/App';
-import { UserList } from './components/UserList';
+import UserList from './components/UserList';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
