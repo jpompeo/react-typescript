@@ -14,12 +14,17 @@ export function userReducer(prevState: IUser = INITIAL_STATE, action: IUserActio
         case UserActions.SAVE_USERNAME:
             return {
                 ...prevState,
-                username: action.payload.username
+                username: (action.payload as IUser).username
             }
         case UserActions.SAVE_USER_MESSAGE:
             return {
                 ...prevState,
-                userMessage: action.payload.userMessage
+                userMessage: (action.payload as IUser).userMessage
+            }
+        case UserActions.SAVE_FRIENDS:
+            return {
+                ...prevState,
+                friendList: action.payload as string[]
             }
         default:
             return prevState

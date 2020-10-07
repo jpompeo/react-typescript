@@ -20,6 +20,13 @@ export function saveUserMessage(user: IUser): IUserActionTypes {
 	};
 }
 
+export function saveFriends(users: string[]): IUserActionTypes {
+	return {
+		type: UserActions.SAVE_FRIENDS,
+		payload: users
+	};
+}
+
 export function getFriendList(url: string) {
 	//return async (ThunkDispatch) => {}
 	return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
@@ -42,3 +49,4 @@ export function getFriendList(url: string) {
 		});
 	};
 }
+
