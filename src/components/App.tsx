@@ -1,12 +1,8 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { Dispatch } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
+import { connect, MapDispatchToProps } from "react-redux";
 import { Link } from 'react-router-dom';
-import {
-	saveUsername as saveUsernameAction,
-	saveUserMessage as saveUserMessageAction
-} from "../store/user/UserActions";
+import { saveUserMessage as saveUserMessageAction } from "../store/user/UserActions";
 import { IUser } from '../store/user/UserTypes';
 import { IAppState } from '../store/RootReducer';
 import '../styles/App.css';
@@ -51,7 +47,7 @@ const App: React.FC<IAppDispatchToProps & IAppOwnProps> =
 
 		useEffect(() => {
 			saveUserMessage({username, userMessage: message});
-		}, [message, saveUserMessage])
+		}, [message, saveUserMessage, username])
 
 		return (
 			<div className={"App"}>
