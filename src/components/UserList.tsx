@@ -42,6 +42,15 @@ const UserList: React.FC<IUserList> =
         }
     }, [fetchFriends])
 
+    let friendListJsx: JSX.Element | undefined = undefined;
+    if (user.friendList) {
+        friendListJsx = (
+            <ul>
+                {user.friendList.map((friend)=> <li key={friend}>{friend}</li>)}
+            </ul>
+        )
+    }
+
     return (
         <CenterContent>
             <p>
@@ -58,6 +67,10 @@ const UserList: React.FC<IUserList> =
             >
                 Home
             </Link>
+            <h3>
+                Friend List
+            </h3>
+            {friendListJsx ? friendListJsx : null}
         </CenterContent>
     );
 }
