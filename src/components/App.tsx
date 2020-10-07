@@ -1,6 +1,6 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { Dispatch } from 'redux';
-import ThunkDispatch from 'redux-thunk';
+import { ThunkDispatch } from 'redux-thunk';
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import { Link } from 'react-router-dom';
 import {
@@ -11,14 +11,14 @@ import { IUser } from '../store/user/UserTypes';
 import { IAppState } from '../store/RootReducer';
 import '../styles/App.css';
 
-interface IAppDispatchToProps {
-    saveUsername: (user: IUser) => void;
-    saveUserMessage: (user: IUser) => void;
-}
-
 interface IAppOwnProps {
     username: string | undefined;
     userType: 'admin' | 'moderator' | 'user' | 'guest';
+}
+
+interface IAppDispatchToProps {
+    saveUsername: (user: IUser) => void;
+    saveUserMessage: (user: IUser) => void;
 }
 
 const App: React.FC<IAppOwnProps> = ({userType, username}): JSX.Element => {
@@ -78,4 +78,6 @@ const mapDispatchToProps: MapDispatchToProps<
     }
 });
 
-export default App;
+export default connect<{}, IAppDispatchToProps, IAppOwnProps, IAppState>(null, mapDispatchToProps)(App);
+
+
